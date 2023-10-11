@@ -1,0 +1,27 @@
+unit Charts_u;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask, Vcl.ExtCtrls;
+
+type
+  TfrmCharts = class(TForm)
+    Button1: TButton;
+    Initial_Month: TLabeledEdit;
+    Final_Month: TLabeledEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCharts: TfrmCharts;
+
+implementation
+
+{$R *.dfm}
+
+end.

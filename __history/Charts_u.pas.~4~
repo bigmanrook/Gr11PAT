@@ -1,0 +1,212 @@
+unit Charts_u;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask, Vcl.ExtCtrls, dmBusinessManagement_U;
+
+type
+  TfrmCharts = class(TForm)
+    btnMakeChart: TButton;
+    Initial_Month: TLabeledEdit;
+    Final_Month: TLabeledEdit;
+    Shape1: TShape;
+    Product: TLabeledEdit;
+    Shape2: TShape;
+    Shape3: TShape;
+    Shape4: TShape;
+    Shape5: TShape;
+    Shape6: TShape;
+    Shape7: TShape;
+    Shape8: TShape;
+    Shape9: TShape;
+    Shape10: TShape;
+    Shape11: TShape;
+    Shape12: TShape;
+    lblGraph: TLabel;
+    procedure btnMakeChartClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCharts: TfrmCharts;
+  sFirstMonth, SLastMonth, sProduct : String;
+  iStart, iEnd, iIndex : Integer;
+  rSales, rTotal, rAverage : Real;
+  arrCol : array[1..12] of TShape;
+  arrLabels : array[1..12] of TLabel;
+
+implementation
+
+{$R *.dfm}
+
+
+procedure TfrmCharts.btnMakeChartClick(Sender: TObject);
+var
+  I: Integer;
+begin
+//Assign months with numbers and loop through the numbers
+sFirstMonth := Initial_Month.text;
+sLastMonth := Final_Month.Text;
+sProduct := Product.Text;
+
+
+if LowerCase(sFirstMonth) = LowerCase('January') then
+begin
+  iEnd := 1;
+end;
+if LowerCase(sFirstMonth) = LowerCase('February') then
+begin
+  iEnd := 2;
+end;
+if LowerCase(sFirstMonth) = LowerCase('March') then
+begin
+  iEnd := 3;
+end;
+if LowerCase(sFirstMonth) = LowerCase('April') then
+begin
+  iEnd := 4;
+end;
+if LowerCase(sFirstMonth) = LowerCase('May') then
+begin
+  iEnd := 5;
+end;
+if LowerCase(sFirstMonth) = LowerCase('June') then
+begin
+  iEnd := 6;
+end;
+if LowerCase(sFirstMonth) = LowerCase('July') then
+begin
+  iEnd := 7;
+end;
+if LowerCase(sFirstMonth) = LowerCase('August') then
+begin
+  iEnd := 8;
+end;
+if LowerCase(sFirstMonth) = LowerCase('September') then
+begin
+  iEnd := 9;
+end;
+if LowerCase(sFirstMonth) = LowerCase('October') then
+begin
+  iEnd := 10;
+end;
+if LowerCase(sFirstMonth) = LowerCase('November') then
+begin
+  iEnd := 11;
+end;
+if LowerCase(sFirstMonth) = LowerCase('December') then
+begin
+  iEnd := 12;
+end;
+
+
+if LowerCase(sLastMonth) = LowerCase('January') then
+begin
+  iStart := 1;
+end;
+if LowerCase(sLastMonth) = LowerCase('February') then
+begin
+  iStart := 2;
+end;
+if LowerCase(sLastMonth) = LowerCase('March') then
+begin
+  iStart := 3;
+end;
+if LowerCase(sLastMonth) = LowerCase('April') then
+begin
+  iStart := 4;
+end;
+if LowerCase(sLastMonth) = LowerCase('May') then
+begin
+  iStart := 5;
+end;
+if LowerCase(sLastMonth) = LowerCase('June') then
+begin
+  iStart := 6;
+end;
+if LowerCase(sLastMonth) = LowerCase('July') then
+begin
+  iStart := 7;
+end;
+if LowerCase(sLastMonth) = LowerCase('August') then
+begin
+  iStart := 8;
+end;
+if LowerCase(sLastMonth) = LowerCase('September') then
+begin
+  iStart := 9;
+end;
+if LowerCase(sLastMonth) = LowerCase('October') then
+begin
+  iStart := 10;
+end;
+if LowerCase(sLastMonth) = LowerCase('November') then
+begin
+  iStart := 11;
+end;
+if LowerCase(sLastMonth) = LowerCase('December') then
+begin
+  iStart := 12;
+end;
+
+if iStart > iEnd then
+begin
+  ShowMessage('Please enter a valid range, ie January to March')
+end
+else
+begin
+rTotal := 0;
+iIndex := dmAccounts.tblSales.FindField(sProduct).Index;
+ShowMessage(inttostr(iIndex));
+
+//Assigning arrays with values and components
+arrCol[1] := Shape1;
+arrCol[2] := Shape2;
+arrCol[3] := Shape3;
+arrCol[4] := Shape4;
+arrCol[5] := Shape5;
+arrCol[6] := Shape6;
+arrCol[7] := Shape7;
+arrCol[8] := Shape8;
+arrCol[9] := Shape9;
+arrCol[10] := Shape10;
+arrCol[11] := Shape11;
+arrCol[12] := Shape12;
+
+
+
+
+
+for I := iStart to iEnd do
+  begin
+  with dmAccounts do
+    case iStart of
+    1:  rSales := tblSales['january'];
+    2:  rSales := tblSales['february'];
+    3:  rSales := tblSales['march'];
+    4:  rSales := tblSales['april'];
+    5:  rSales := tblSales['may'];
+    6:  rSales := tblSales['june'];
+    7:  rSales := tblSales['july'];
+    8:  rSales := tblSales['august'];
+    9:  rSales := tblSales['september'];
+    10:  rSales := tblSales['october'];
+    11:  rSales := tblSales['november'];
+    12:  rSales := tblSales['december'];
+    end;
+
+   rTotal := rSales + rTotal;
+
+
+  end;
+ rAverage := rTotal/(iEnd-iStart);
+end;
+
+end;
+
+end.

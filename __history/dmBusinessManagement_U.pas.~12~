@@ -1,0 +1,61 @@
+unit dmBusinessManagement_U;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, ADODB, DB;
+
+type
+  TdmAccounts = class(TDataModule)
+    procedure DataModuleCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    conAcc : TADOConnection ;
+    tblAcc : TADOTable ;
+    dscAcc : TDataSource ;
+    dscData : TDataSource ;
+    tblData : TADOTable;
+    dscSales : TDataSource ;
+    tblSales : TADOTable;
+  end;
+
+var
+  dmAccounts: TdmAccounts;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+procedure TdmAccounts.DataModuleCreate(Sender: TObject);
+begin
+conAcc := TADOConnection.Create(dmAccounts);
+tblAcc := TADOTable.Create(dmAccounts);
+dscAcc := TDataSource.Create(dmAccounts);
+tblData := TADOTable.Create(dmAccounts);
+dscData := TDataSource.Create(dmAccounts);
+
+conAcc.ConnectionString := 'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=BusinessManagementNEW.mdb;Persist Security Info=False';
+conAcc.LoginPrompt := False;
+conAcc.Open;
+
+tblAcc.Connection := conAcc ;
+tblAcc.TableName := 'tblAccounts';
+tblData.Connection := conAcc ;
+tblData.TableName := 'tblProducts';
+tblData.Connection := conAcc ;
+tblData.TableName := 'tblSales';
+
+dscAcc.DataSet := tblAcc;
+dscData.DataSet := tblData;
+dscSales.DataSet := tblSales;
+tblAcc.Open;
+tblSales.Open;
+tblData.Open;
+
+end;
+
+end.

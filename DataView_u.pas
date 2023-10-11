@@ -1,0 +1,61 @@
+unit DataView_u;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Vcl.StdCtrls, MainMenu_u, dmDatabase;
+
+type
+  TfrmDataView = class(TForm)
+    dbgView: TDBGrid;
+    btnMainMenu: TButton;
+    procedure btnMainMenuClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmDataView: TfrmDataView;
+
+
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmDataView.btnMainMenuClick(Sender: TObject);
+
+
+
+begin
+
+frmDataView.Visible := False;
+frmMenu.Visible := True;
+
+end;
+
+procedure TfrmDataView.FormCreate(Sender: TObject);
+begin
+dbgView.DataSource := dmAccounts.dscSales;
+ dbgView.Columns[0].Width := 60;
+ dbgView.Columns[1].Width := 60;
+ dbgView.Columns[2].Width := 60;
+ dbgView.Columns[3].Width := 60;
+ dbgView.Columns[4].Width := 60;
+ dbgView.Columns[5].Width := 60;
+ dbgView.Columns[6].Width := 60;
+ dbgView.Columns[7].Width := 60;
+ dbgView.Columns[8].Width := 60;
+ dbgView.Columns[9].Width := 60;
+ dbgView.Columns[10].Width := 60;
+ dbgView.Columns[11].Width := 60;
+ dbgView.Columns[12].Width := 60;
+ dbgView.Columns[13].Width := 60;
+end;
+
+end.
