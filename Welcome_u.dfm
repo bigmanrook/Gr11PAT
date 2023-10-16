@@ -1,9 +1,9 @@
 object frmWelcome: TfrmWelcome
-  Left = 694
-  Top = 332
+  Left = 460
+  Top = 225
   Caption = 'Welcome'
-  ClientHeight = 440
-  ClientWidth = 620
+  ClientHeight = 438
+  ClientWidth = 612
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

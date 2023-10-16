@@ -3,8 +3,10 @@ unit Charts_u;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask, Vcl.ExtCtrls, dmDatabase;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask, Vcl.ExtCtrls,
+  dmBusinessManagement_U;
 
 type
   TfrmCharts = class(TForm)
@@ -12,7 +14,7 @@ type
     Initial_Month: TLabeledEdit;
     Final_Month: TLabeledEdit;
     Shape1: TShape;
-    Product: TLabeledEdit;
+    Product_ID: TLabeledEdit;
     Shape2: TShape;
     Shape3: TShape;
     Shape4: TShape;
@@ -34,213 +36,198 @@ type
 
 var
   frmCharts: TfrmCharts;
-  sFirstMonth, SLastMonth, sProduct : String;
-  iStart, iEnd, iIndex, iSales, iTop, iInitHeight, iDelta : Integer;
-  rSales, rTotal, rAverage : Real;
-  arrCol : array[1..12] of TShape;
-  arrLabels : array[1..12] of TLabel;
+  sFirstMonth, SLastMonth, sProduct: String;
+  iStart, iEnd, iIndex, iSales, iTop, iInitHeight, iDelta: Integer;
+  rSales, rTotal, rAverage: Real;
+  arrCol: array [1 .. 12] of TShape;
+  arrLabels: array [1 .. 12] of TLabel;
 
 implementation
 
 {$R *.dfm}
 
-
 procedure TfrmCharts.btnMakeChartClick(Sender: TObject);
 var
   I: Integer;
 begin
-//Assign months with numbers and loop through the numbers
-sFirstMonth := Initial_Month.text;
-sLastMonth := Final_Month.Text;
-sProduct := Product.Text;
+  // Assign months with numbers and loop through the numbers
+  sFirstMonth := Initial_Month.text;
+  SLastMonth := Final_Month.text;
+  sProduct := Product_ID.text;
 
+  // Assigning arrays with values and components
+  arrCol[1] := Shape1;
+  arrCol[2] := Shape2;
+  arrCol[3] := Shape3;
+  arrCol[4] := Shape4;
+  arrCol[5] := Shape5;
+  arrCol[6] := Shape6;
+  arrCol[7] := Shape7;
+  arrCol[8] := Shape8;
+  arrCol[9] := Shape9;
+  arrCol[10] := Shape10;
+  arrCol[11] := Shape11;
+  arrCol[12] := Shape12;
 
-if LowerCase(sFirstMonth) = LowerCase('January') then
-begin
-  iEnd := 1;
-end;
-if LowerCase(sFirstMonth) = LowerCase('February') then
-begin
-  iEnd := 2;
-end;
-if LowerCase(sFirstMonth) = LowerCase('March') then
-begin
-  iEnd := 3;
-end;
-if LowerCase(sFirstMonth) = LowerCase('April') then
-begin
-  iEnd := 4;
-end;
-if LowerCase(sFirstMonth) = LowerCase('May') then
-begin
-  iEnd := 5;
-end;
-if LowerCase(sFirstMonth) = LowerCase('June') then
-begin
-  iEnd := 6;
-end;
-if LowerCase(sFirstMonth) = LowerCase('July') then
-begin
-  iEnd := 7;
-end;
-if LowerCase(sFirstMonth) = LowerCase('August') then
-begin
-  iEnd := 8;
-end;
-if LowerCase(sFirstMonth) = LowerCase('September') then
-begin
-  iEnd := 9;
-end;
-if LowerCase(sFirstMonth) = LowerCase('October') then
-begin
-  iEnd := 10;
-end;
-if LowerCase(sFirstMonth) = LowerCase('November') then
-begin
-  iEnd := 11;
-end;
-if LowerCase(sFirstMonth) = LowerCase('December') then
-begin
-  iEnd := 12;
-end;
-
-
-if LowerCase(sLastMonth) = LowerCase('January') then
-begin
-  iStart := 1;
-end;
-if LowerCase(sLastMonth) = LowerCase('February') then
-begin
-  iStart := 2;
-end;
-if LowerCase(sLastMonth) = LowerCase('March') then
-begin
-  iStart := 3;
-end;
-if LowerCase(sLastMonth) = LowerCase('April') then
-begin
-  iStart := 4;
-end;
-if LowerCase(sLastMonth) = LowerCase('May') then
-begin
-  iStart := 5;
-end;
-if LowerCase(sLastMonth) = LowerCase('June') then
-begin
-  iStart := 6;
-end;
-if LowerCase(sLastMonth) = LowerCase('July') then
-begin
-  iStart := 7;
-end;
-if LowerCase(sLastMonth) = LowerCase('August') then
-begin
-  iStart := 8;
-end;
-if LowerCase(sLastMonth) = LowerCase('September') then
-begin
-  iStart := 9;
-end;
-if LowerCase(sLastMonth) = LowerCase('October') then
-begin
-  iStart := 10;
-end;
-if LowerCase(sLastMonth) = LowerCase('November') then
-begin
-  iStart := 11;
-end;
-if LowerCase(sLastMonth) = LowerCase('December') then
-begin
-  iStart := 12;
-end;
-
-if iStart > iEnd then
-begin
-  ShowMessage('Please enter a valid range, ie January to March')
-end
-else
-begin
-rTotal := 0;
-iIndex := dmAccounts.tblSales.FindField(sProduct).Index;
-ShowMessage(inttostr(iIndex));
-
-//Assigning arrays with values and components
-arrCol[1] := Shape1;
-arrCol[2] := Shape2;
-arrCol[3] := Shape3;
-arrCol[4] := Shape4;
-arrCol[5] := Shape5;
-arrCol[6] := Shape6;
-arrCol[7] := Shape7;
-arrCol[8] := Shape8;
-arrCol[9] := Shape9;
-arrCol[10] := Shape10;
-arrCol[11] := Shape11;
-arrCol[12] := Shape12;
-
-
-
-//Forming chart by assigning heights and coordinates for tops of shapes - this is done to visualize the data
-
-for I := iStart to iEnd do
+  if LowerCase(sFirstMonth) = LowerCase('January') then
   begin
-  with dmAccounts do
-    case iStart of
-    1:  iSales := tblSales['january'];
-    2:  iSales := tblSales['february'];
-    3:  iSales := tblSales['march'];
-    4:  iSales := tblSales['april'];
-    5:  iSales := tblSales['may'];
-    6:  iSales := tblSales['june'];
-    7:  iSales := tblSales['july'];
-    8:  iSales := tblSales['august'];
-    9:  iSales := tblSales['september'];
-    10:  iSales := tblSales['october'];
-    11:  iSales := tblSales['november'];
-    12:  iSales := tblSales['december'];
-    end;
-
-   {with dmAccounts do
-    case iStart of
-    1:  iInitHeight := Shape1.Height;
-    2:  iInitHeight := Shape2.Height;
-    3:  iInitHeight := Shape3.Height;
-    4:  iInitHeight := Shape4.Height;
-    5:  iInitHeight := Shape5.Height;
-    6:  iInitHeight := Shape6.Height;
-    7:  iInitHeight := Shape7.Height;
-    8:  iInitHeight := Shape8.Height;
-    9:  iInitHeight := Shape9.Height;
-    10: iInitHeight := Shape10.Height;
-    11: iInitHeight := Shape11.Height;
-    12: iInitHeight := Shape12.Height;
-    end; }
-
-   iInitHeight := arrCol[I].Height;
-   rTotal := iSales + rTotal;
-   iDelta := iSales - iInitHeight;
-   {with dmAccounts do
-    case iStart of
-    1:  iTop := Shape1.Top + iDelta;
-    2:  iTop := Shape2.Top + iDelta;
-    3:  iTop := Shape3.Top + iDelta;
-    4:  iTop := Shape4.Top + iDelta;
-    5:  iTop := Shape5.Top + iDelta;
-    6:  iTop := Shape6.Top + iDelta;
-    7:  iTop := Shape7.Top + iDelta;
-    8:  iTop := Shape8.Top + iDelta;
-    9:  iTop := Shape9.Top + iDelta;
-    10: iTop := Shape10.Top + iDelta;
-    11: iTop := Shape11.Top + iDelta;
-    12: iTop := Shape12.Top + iDelta;
-    end;}
-
-   arrCol[I].Height := iSales;
-   arrCol[I].Top := arrCol[I].Top + iDelta;
-
+    iStart := 1;
   end;
- rAverage := rTotal/(iEnd-iStart+1);
-end;
+  if LowerCase(sFirstMonth) = LowerCase('February') then
+  begin
+    iStart := 2;
+  end;
+  if LowerCase(sFirstMonth) = LowerCase('March') then
+  begin
+    iStart := 3;
+  end;
+  if LowerCase(sFirstMonth) = LowerCase('April') then
+  begin
+    iStart := 4;
+  end;
+  if LowerCase(sFirstMonth) = LowerCase('May') then
+  begin
+    iStart := 5;
+  end;
+  if LowerCase(sFirstMonth) = LowerCase('June') then
+  begin
+    iStart := 6;
+  end;
+  if LowerCase(sFirstMonth) = LowerCase('July') then
+  begin
+    iStart := 7;
+  end;
+  if LowerCase(sFirstMonth) = LowerCase('August') then
+  begin
+    iStart := 8;
+  end;
+  if LowerCase(sFirstMonth) = LowerCase('September') then
+  begin
+    iStart := 9;
+  end;
+  if LowerCase(sFirstMonth) = LowerCase('October') then
+  begin
+    iStart := 10;
+  end;
+  if LowerCase(sFirstMonth) = LowerCase('November') then
+  begin
+    iStart := 11;
+  end;
+  if LowerCase(sFirstMonth) = LowerCase('December') then
+  begin
+    iStart := 12;
+  end;
+
+  if LowerCase(SLastMonth) = LowerCase('January') then
+  begin
+    iEnd := 1;
+  end;
+  if LowerCase(SLastMonth) = LowerCase('February') then
+  begin
+    iEnd := 2;
+  end;
+  if LowerCase(SLastMonth) = LowerCase('March') then
+  begin
+    iEnd := 3;
+  end;
+  if LowerCase(SLastMonth) = LowerCase('April') then
+  begin
+    iEnd := 4;
+  end;
+  if LowerCase(SLastMonth) = LowerCase('May') then
+  begin
+    iEnd := 5;
+  end;
+  if LowerCase(SLastMonth) = LowerCase('June') then
+  begin
+    iEnd := 6;
+  end;
+  if LowerCase(SLastMonth) = LowerCase('July') then
+  begin
+    iEnd := 7;
+  end;
+  if LowerCase(SLastMonth) = LowerCase('August') then
+  begin
+    iEnd := 8;
+  end;
+  if LowerCase(SLastMonth) = LowerCase('September') then
+  begin
+    iEnd := 9;
+  end;
+  if LowerCase(SLastMonth) = LowerCase('October') then
+  begin
+    iEnd := 10;
+  end;
+  if LowerCase(SLastMonth) = LowerCase('November') then
+  begin
+    iEnd := 11;
+  end;
+  if LowerCase(SLastMonth) = LowerCase('December') then
+  begin
+    iEnd := 12;
+  end;
+
+  ShowMessage(inttostr(iEnd));
+  ShowMessage(inttostr(iStart));
+
+  if iStart > iEnd then
+  begin
+    ShowMessage('Please enter a valid range, ie January to March')
+  end
+  else
+  begin
+    rTotal := 0;
+    dmAccounts.tblSales.First;
+    while not dmAccounts.tblSales.EOF do
+    begin
+      if strtoint(sProduct) = dmAccounts.tblSales['ID'] then
+      begin
+        for I := iStart to iEnd do
+        begin
+          with dmAccounts do
+            case I of
+              1:
+                iSales := tblSales['january'];
+              2:
+                iSales := tblSales['february'];
+              3:
+                iSales := tblSales['march'];
+              4:
+                iSales := tblSales['april'];
+              5:
+                iSales := tblSales['may'];
+              6:
+                iSales := tblSales['june'];
+              7:
+                iSales := tblSales['july'];
+              8:
+                iSales := tblSales['august'];
+              9:
+                iSales := tblSales['september'];
+              10:
+                iSales := tblSales['october'];
+              11:
+                iSales := tblSales['november'];
+              12:
+                iSales := tblSales['december'];
+
+            end;
+
+          iInitHeight := arrCol[I].Height;
+          rTotal := iSales + rTotal;
+          iDelta := iSales - iInitHeight;
+          arrCol[I].Height := iSales;
+          arrCol[I].Top := arrCol[I].Top - iDelta;
+        end;
+
+      end;
+
+      dmAccounts.tblSales.Next;
+    end;
+  end;
+
+  rAverage := rTotal / (iEnd - iStart);
+  ShowMessage('Average is equal to: ' + floattostrf(rAverage, ffFixed, 8, 2));
 
 end;
 

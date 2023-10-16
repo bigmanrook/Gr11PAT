@@ -8,7 +8,6 @@ uses
   MainMenu_u in 'MainMenu_u.pas' {frmMenu},
   SignUp_u in 'SignUp_u.pas' {frmSignUp},
   DataEdit_u in 'DataEdit_u.pas' {frmDataEdit},
-  DataView_u in 'DataView_u.pas' {frmDataView},
   Charts_u in 'Charts_u.pas' {frmCharts};
 
 {$R *.res}
@@ -22,7 +21,6 @@ begin
   Application.CreateForm(TdmAccounts, dmAccounts);
   Application.CreateForm(TfrmSignUp, frmSignUp);
   Application.CreateForm(TfrmDataEdit, frmDataEdit);
-  Application.CreateForm(TfrmDataView, frmDataView);
   Application.CreateForm(TfrmCharts, frmCharts);
   Application.Run;
 end.

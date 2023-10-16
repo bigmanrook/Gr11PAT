@@ -35,7 +35,7 @@ type
 var
   frmCharts: TfrmCharts;
   sFirstMonth, SLastMonth, sProduct : String;
-  iStart, iEnd, iIndex : Integer;
+  iStart, iEnd, iIndex, iSales, iTop, iInitHeight, iDelta : Integer;
   rSales, rTotal, rAverage : Real;
   arrCol : array[1..12] of TShape;
   arrLabels : array[1..12] of TLabel;
@@ -57,101 +57,101 @@ sProduct := Product.Text;
 
 if LowerCase(sFirstMonth) = LowerCase('January') then
 begin
-  iEnd := 1;
+  iStart := 1;
 end;
 if LowerCase(sFirstMonth) = LowerCase('February') then
 begin
-  iEnd := 2;
+  iStart := 2;
 end;
 if LowerCase(sFirstMonth) = LowerCase('March') then
 begin
-  iEnd := 3;
+  iStart := 3;
 end;
 if LowerCase(sFirstMonth) = LowerCase('April') then
 begin
-  iEnd := 4;
+  iStart := 4;
 end;
 if LowerCase(sFirstMonth) = LowerCase('May') then
 begin
-  iEnd := 5;
+  iStart := 5;
 end;
 if LowerCase(sFirstMonth) = LowerCase('June') then
 begin
-  iEnd := 6;
+  iStart := 6;
 end;
 if LowerCase(sFirstMonth) = LowerCase('July') then
 begin
-  iEnd := 7;
+  iStart := 7;
 end;
 if LowerCase(sFirstMonth) = LowerCase('August') then
 begin
-  iEnd := 8;
+  iStart := 8;
 end;
 if LowerCase(sFirstMonth) = LowerCase('September') then
 begin
-  iEnd := 9;
+  iStart := 9;
 end;
 if LowerCase(sFirstMonth) = LowerCase('October') then
 begin
-  iEnd := 10;
+  iStart := 10;
 end;
 if LowerCase(sFirstMonth) = LowerCase('November') then
 begin
-  iEnd := 11;
+  iStart := 11;
 end;
 if LowerCase(sFirstMonth) = LowerCase('December') then
 begin
-  iEnd := 12;
+  iStart := 12;
 end;
 
 
 if LowerCase(sLastMonth) = LowerCase('January') then
 begin
-  iStart := 1;
+  iEnd := 1;
 end;
 if LowerCase(sLastMonth) = LowerCase('February') then
 begin
-  iStart := 2;
+  iEnd := 2;
 end;
 if LowerCase(sLastMonth) = LowerCase('March') then
 begin
-  iStart := 3;
+  iEnd := 3;
 end;
 if LowerCase(sLastMonth) = LowerCase('April') then
 begin
-  iStart := 4;
+  iEnd := 4;
 end;
 if LowerCase(sLastMonth) = LowerCase('May') then
 begin
-  iStart := 5;
+  iEnd := 5;
 end;
 if LowerCase(sLastMonth) = LowerCase('June') then
 begin
-  iStart := 6;
+  iEnd := 6;
 end;
 if LowerCase(sLastMonth) = LowerCase('July') then
 begin
-  iStart := 7;
+  iEnd := 7;
 end;
 if LowerCase(sLastMonth) = LowerCase('August') then
 begin
-  iStart := 8;
+  iEnd := 8;
 end;
 if LowerCase(sLastMonth) = LowerCase('September') then
 begin
-  iStart := 9;
+  iEnd := 9;
 end;
 if LowerCase(sLastMonth) = LowerCase('October') then
 begin
-  iStart := 10;
+  iEnd := 10;
 end;
 if LowerCase(sLastMonth) = LowerCase('November') then
 begin
-  iStart := 11;
+  iEnd := 11;
 end;
 if LowerCase(sLastMonth) = LowerCase('December') then
 begin
-  iStart := 12;
+  iEnd := 12;
 end;
 
 if iStart > iEnd then
@@ -161,7 +161,7 @@ end
 else
 begin
 rTotal := 0;
-iIndex := dmAccounts.tblSales.FindField(sProduct).Index;
+
 ShowMessage(inttostr(iIndex));
 
 //Assigning arrays with values and components
@@ -180,31 +180,66 @@ arrCol[12] := Shape12;
 
 
 
-
+//Forming chart by assigning heights and coordinates for tops of shapes - this is done to visualize the data
 
 for I := iStart to iEnd do
   begin
   with dmAccounts do
     case iStart of
-    1:  rSales := tblSales['january'];
-    2:  rSales := tblSales['february'];
-    3:  rSales := tblSales['march'];
-    4:  rSales := tblSales['april'];
-    5:  rSales := tblSales['may'];
-    6:  rSales := tblSales['june'];
-    7:  rSales := tblSales['july'];
-    8:  rSales := tblSales['august'];
-    9:  rSales := tblSales['september'];
-    10:  rSales := tblSales['october'];
-    11:  rSales := tblSales['november'];
-    12:  rSales := tblSales['december'];
+    1:  iSales := tblSales['january'];
+    2:  iSales := tblSales['february'];
+    3:  iSales := tblSales['march'];
+    4:  iSales := tblSales['april'];
+    5:  iSales := tblSales['may'];
+    6:  iSales := tblSales['june'];
+    7:  iSales := tblSales['july'];
+    8:  iSales := tblSales['august'];
+    9:  iSales := tblSales['september'];
+    10:  iSales := tblSales['october'];
+    11:  iSales := tblSales['november'];
+    12:  iSales := tblSales['december'];
     end;
 
-   rTotal := rSales + rTotal;
+   {with dmAccounts do
+    case iStart of
+    1:  iInitHeight := Shape1.Height;
+    2:  iInitHeight := Shape2.Height;
+    3:  iInitHeight := Shape3.Height;
+    4:  iInitHeight := Shape4.Height;
+    5:  iInitHeight := Shape5.Height;
+    6:  iInitHeight := Shape6.Height;
+    7:  iInitHeight := Shape7.Height;
+    8:  iInitHeight := Shape8.Height;
+    9:  iInitHeight := Shape9.Height;
+    10: iInitHeight := Shape10.Height;
+    11: iInitHeight := Shape11.Height;
+    12: iInitHeight := Shape12.Height;
+    end; }
 
+   iInitHeight := arrCol[I].Height;
+   rTotal := iSales + rTotal;
+   iDelta := iSales - iInitHeight;
+   {with dmAccounts do
+    case iStart of
+    1:  iTop := Shape1.Top + iDelta;
+    2:  iTop := Shape2.Top + iDelta;
+    3:  iTop := Shape3.Top + iDelta;
+    4:  iTop := Shape4.Top + iDelta;
+    5:  iTop := Shape5.Top + iDelta;
+    6:  iTop := Shape6.Top + iDelta;
+    7:  iTop := Shape7.Top + iDelta;
+    8:  iTop := Shape8.Top + iDelta;
+    9:  iTop := Shape9.Top + iDelta;
+    10: iTop := Shape10.Top + iDelta;
+    11: iTop := Shape11.Top + iDelta;
+    12: iTop := Shape12.Top + iDelta;
+    end;}
+
+   arrCol[I].Height := iSales;
+   arrCol[I].Top := arrCol[I].Top + iDelta;
 
   end;
- rAverage := rTotal/(iEnd-iStart);
+ rAverage := rTotal/(iEnd-iStart+1);
 end;
 
 end;

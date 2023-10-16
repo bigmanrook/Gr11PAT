@@ -1,6 +1,6 @@
 object frmSignUp: TfrmSignUp
-  Left = 735
-  Top = 332
+  Left = 460
+  Top = 225
   Caption = 'Sign up Page'
   ClientHeight = 442
   ClientWidth = 628
@@ -50,7 +50,7 @@ object frmSignUp: TfrmSignUp
     Top = 336
     Width = 75
     Height = 25
-    Caption = 'btnSignUp'
+    Caption = 'Sign Up'
     TabOrder = 3
     OnClick = btnSignUpClick
   end

@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask, Vcl.ExtCtrls, dmDatabase;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask, Vcl.ExtCtrls, dmBusinessManagement_U;
 
 type
   TfrmSignUp = class(TForm)
@@ -50,26 +50,6 @@ begin
    bFound := False;
    with dmAccounts do
    begin
-    if sAccount = '' then
-    begin
-      ShowMessage('Please enter a valid account name');
-      exit;
-    end;
-    if sUsername = '' then
-    begin
-      ShowMessage('Please enter a valid username name');
-      exit;
-    end;
-    if sPassword = '' then
-    begin
-      ShowMessage('Please enter a valid password');
-      exit;
-    end;
-    if Length(sPassword) < 8 then
-    begin
-      ShowMessage('Please enter a valid password, with over 8 characters');
-      exit;
-    end;
     tblAcc.First;
     while not tblAcc.eof OR bFound = True do
     begin

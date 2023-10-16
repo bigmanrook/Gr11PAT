@@ -122,14 +122,14 @@ object frmCharts: TfrmCharts
     TabOrder = 2
     Text = ''
   end
-  object Product: TLabeledEdit
-    Left = 264
-    Top = 360
+  object Product_ID: TLabeledEdit
+    Left = 271
+    Top = 364
     Width = 129
     Height = 23
-    EditLabel.Width = 42
+    EditLabel.Width = 56
     EditLabel.Height = 15
-    EditLabel.Caption = 'Product'
+    EditLabel.Caption = 'Product ID'
     TabOrder = 3
     Text = ''
   end

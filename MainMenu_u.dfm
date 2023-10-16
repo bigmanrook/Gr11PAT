@@ -1,6 +1,6 @@
 object frmMenu: TfrmMenu
-  Left = 674
-  Top = 332
+  Left = 443
+  Top = 225
   Caption = 'Main Menu'
   ClientHeight = 442
   ClientWidth = 628
@@ -38,5 +38,14 @@ object frmMenu: TfrmMenu
     Caption = 'View Data'
     TabOrder = 2
     OnClick = btnViewDataClick
+  end
+  object btnData: TButton
+    Left = 264
+    Top = 344
+    Width = 75
+    Height = 25
+    Caption = 'Visualize data'
+    TabOrder = 3
+    OnClick = btnDataClick
   end
 end
