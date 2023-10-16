@@ -1,0 +1,16 @@
+program BusinessManagement;
+
+uses
+  Vcl.Forms,
+  BusinessManagementSoftware in 'BusinessManagementSoftware.pas' {frmWelcome},
+  dmBusinessManagement_U in 'dmBusinessManagement_U.pas' {dmAccounts: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmWelcome, frmWelcome);
+  Application.CreateForm(TdmAccounts, dmAccounts);
+  Application.Run;
+end.

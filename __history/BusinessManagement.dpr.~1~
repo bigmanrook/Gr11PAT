@@ -1,0 +1,14 @@
+program BusinessManagement;
+
+uses
+  Vcl.Forms,
+  BusinessManagementSoftware in 'BusinessManagementSoftware.pas' {frmWelcome};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmWelcome, frmWelcome);
+  Application.Run;
+end.

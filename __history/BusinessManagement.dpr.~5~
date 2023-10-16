@@ -1,0 +1,20 @@
+program BusinessManagement;
+
+uses
+  Vcl.Forms,
+  DataGrid_u in 'DataGrid_u.pas' {frmData},
+  dmBusinessManagement_U in 'dmBusinessManagement_U.pas' {dmAccounts: TDataModule},
+  Welcome_u in 'Welcome_u.pas' {frmWelcome},
+  MainMenu_u in 'MainMenu_u.pas' {frmMenu};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmWelcome, frmWelcome);
+  Application.CreateForm(TfrmMenu, frmMenu);
+  Application.CreateForm(TfrmData, frmData);
+  Application.CreateForm(TdmAccounts, dmAccounts);
+  Application.Run;
+end.
