@@ -15,13 +15,22 @@ object frmData: TfrmData
   object dbgAccTable: TDBGrid
     Left = 24
     Top = 8
-    Width = 569
-    Height = 409
+    Width = 577
+    Height = 361
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -12
     TitleFont.Name = 'Segoe UI'
     TitleFont.Style = []
+  end
+  object btnBack: TButton
+    Left = 526
+    Top = 392
+    Width = 75
+    Height = 25
+    Caption = 'Back'
+    TabOrder = 1
+    OnClick = btnBackClick
   end
 end
