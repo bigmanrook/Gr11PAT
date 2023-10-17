@@ -10,6 +10,7 @@ object frmDataEdit: TfrmDataEdit
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnClose = Terminate
   OnCreate = ConnectDataGrid
   TextHeight = 15
   object dbgAccTable: TDBGrid
@@ -31,6 +32,7 @@ object frmDataEdit: TfrmDataEdit
     Height = 25
     Caption = 'back'
     TabOrder = 1
+    OnClick = btnBackClick
   end
   object Month: TLabeledEdit
     Left = 24
@@ -66,12 +68,21 @@ object frmDataEdit: TfrmDataEdit
     Text = ''
   end
   object btnPost: TButton
-    Left = 280
+    Left = 160
     Top = 352
-    Width = 75
+    Width = 89
     Height = 25
     Caption = 'Post Changes'
     TabOrder = 5
     OnClick = btnPostClick
+  end
+  object btnLog: TButton
+    Left = 384
+    Top = 352
+    Width = 89
+    Height = 25
+    Caption = 'Log changes'
+    TabOrder = 6
+    OnClick = btnLogClick
   end
 end

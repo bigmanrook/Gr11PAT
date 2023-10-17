@@ -167,8 +167,8 @@ begin
     iEnd := 12;
   end;
 
-  ShowMessage(inttostr(iEnd));
-  ShowMessage(inttostr(iStart));
+  //ShowMessage(inttostr(iEnd));       Testing value of iEnd
+  //ShowMessage(inttostr(iStart));     Testing value of iStart
 
   if iStart > iEnd then
   begin
