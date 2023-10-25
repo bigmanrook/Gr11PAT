@@ -11,6 +11,7 @@ object frmWelcome: TfrmWelcome
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poDesigned
+  OnClose = FormClose
   TextHeight = 15
   object btnLogin: TButton
     Left = 112

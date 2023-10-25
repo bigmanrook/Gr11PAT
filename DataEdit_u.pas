@@ -16,6 +16,7 @@ type
     Product: TLabeledEdit;
     btnPost: TButton;
     btnLog: TButton;
+    btnProductAdd: TButton;
 
     procedure btnPostClick(Sender: TObject);
     procedure ConnectDataGrid(Sender: TObject);
@@ -55,87 +56,27 @@ sLine := 'Logged change: ' + datetostr(date) + ' ; ' + inttostr(iSales);
 end;
 
 procedure TfrmDataEdit.btnPostClick(Sender: TObject);
+
+var
+sProduct : String;
+
 begin
 
-Assignfile(tFile, 'Logged_Changes.txt');
-if not FileExists('Logged_Changes.txt') then
-begin
-  Rewrite(tFile);
-  ShowMessage('File rewritten');
-end;
-
- sProductID := Product.Text;
+ sProduct := Product.Text;
 
 with dmAccounts do
 begin
 
-
- while NOT tblSales.EOF do
- begin
-   if sProductID = tblSales['ID'] then
-   begin
-    tblSales.Edit;
-    sMonth := Lowercase(Month.Text);
-    iSales := strtoint(Value.Text);
+tblSales.Edit;
+tblSales.Append;
+tblSales['Product'] := sProduct ;
+tblSales.Post;
 
 
-    if sMonth = 'january' then
-    begin
-     tblSales['january'] := iSales;
-    end;
-    if sMonth = 'february' then
-    begin
-     tblSales['february'] := iSales;
-    end;
-    if sMonth = 'march' then
-    begin
-     tblSales['march'] := iSales;
-    end;
-    if sMonth = 'april' then
-    begin
-     tblSales['april'] := iSales;
-    end;
-        if sMonth = 'may' then
-    begin
-     tblSales['may'] := iSales;
-    end;
-    if sMonth = 'june' then
-    begin
-     tblSales['june'] := iSales;
-    end;
-    if sMonth = 'july' then
-    begin
-     tblSales['july'] := iSales;
-    end;
-    if sMonth = 'august' then
-    begin
-     tblSales['august'] := iSales;
-    end;
-        if sMonth = 'september' then
-    begin
-     tblSales['september'] := iSales;
-    end;
-    if sMonth = 'october' then
-    begin
-     tblSales['october'] := iSales;
-    end;
-    if sMonth = 'november' then
-    begin
-     tblSales['november'] := iSales;
-    end;
-    if sMonth = 'december' then
-    begin
-     tblSales['december'] := iSales;
-    end;
-    tblSales.Post;
-    break
-   end;
- tblSales.Next;
- end;
 
- Product.Text := '';
- Value.Text := '';
- Month.Text := '';
+
+Product.Text := '';
+
 
 end;
 

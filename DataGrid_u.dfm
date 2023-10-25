@@ -1,6 +1,6 @@
 object frmData: TfrmData
-  Left = 0
-  Top = 0
+  Left = 490
+  Top = 228
   Caption = 'Data'
   ClientHeight = 441
   ClientWidth = 624
@@ -10,6 +10,7 @@ object frmData: TfrmData
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  Position = poDesigned
   OnShow = ConnectDatabase
   TextHeight = 15
   object dbgAccTable: TDBGrid

@@ -14,6 +14,7 @@ type
     Password: TLabeledEdit;
     procedure btnLoginClick(Sender: TObject);
     procedure btnSignUpClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -75,6 +76,11 @@ procedure TfrmWelcome.btnSignUpClick(Sender: TObject);
 begin
  frmSignUp.Visible := True;
  frmWelcome.Visible := False;
+end;
+
+procedure TfrmWelcome.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+application.Terminate;
 end;
 
 end.

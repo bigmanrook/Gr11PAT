@@ -1,6 +1,6 @@
 object frmDataEdit: TfrmDataEdit
-  Left = 0
-  Top = 0
+  Left = 490
+  Top = 228
   Caption = 'Data editting'
   ClientHeight = 441
   ClientWidth = 624
@@ -10,6 +10,7 @@ object frmDataEdit: TfrmDataEdit
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  Position = poDesigned
   OnClose = Terminate
   OnCreate = ConnectDataGrid
   TextHeight = 15
@@ -26,16 +27,16 @@ object frmDataEdit: TfrmDataEdit
     TitleFont.Style = []
   end
   object btnBack: TButton
-    Left = 8
+    Left = 541
     Top = 408
     Width = 75
     Height = 25
-    Caption = 'back'
+    Caption = 'Back'
     TabOrder = 1
     OnClick = btnBackClick
   end
   object Month: TLabeledEdit
-    Left = 24
+    Left = 32
     Top = 288
     Width = 121
     Height = 23
@@ -57,7 +58,7 @@ object frmDataEdit: TfrmDataEdit
     Text = ''
   end
   object Product: TLabeledEdit
-    Left = 264
+    Left = 257
     Top = 288
     Width = 121
     Height = 23
@@ -68,7 +69,7 @@ object frmDataEdit: TfrmDataEdit
     Text = ''
   end
   object btnPost: TButton
-    Left = 160
+    Left = 48
     Top = 352
     Width = 89
     Height = 25
@@ -77,12 +78,21 @@ object frmDataEdit: TfrmDataEdit
     OnClick = btnPostClick
   end
   object btnLog: TButton
-    Left = 384
+    Left = 488
     Top = 352
     Width = 89
     Height = 25
     Caption = 'Log changes'
     TabOrder = 6
     OnClick = btnLogClick
+  end
+  object btnProductAdd: TButton
+    Left = 257
+    Top = 352
+    Width = 106
+    Height = 25
+    Caption = 'Add new product'
+    TabOrder = 7
+    OnClick = btnPostClick
   end
 end

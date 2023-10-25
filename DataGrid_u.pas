@@ -37,7 +37,7 @@ end;
 
 procedure TfrmData.ConnectDatabase(Sender: TObject);
 begin
- dbgAccTable.DataSource := dmAccounts.dscAcc;
+ dbgAccTable.DataSource := dmAccounts.dscSales;
  dbgAccTable.Columns[0].Width := 60;
  dbgAccTable.Columns[1].Width := 60;
  dbgAccTable.Columns[2].Width := 60;
