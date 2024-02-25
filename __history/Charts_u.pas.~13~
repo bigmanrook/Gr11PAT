@@ -55,7 +55,6 @@ begin
   SLastMonth := Final_Month.text;
   sProduct := Product_ID.text;
 
-
   // Assigning arrays with values and components
   arrCol[1] := Shape1;
   arrCol[2] := Shape2;
